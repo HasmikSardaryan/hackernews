@@ -1,3 +1,3 @@
 export default function NotFoundPafge() {
-    return <div>Unknown</div>;
+    return <div>Unknown.</div>;
 }
