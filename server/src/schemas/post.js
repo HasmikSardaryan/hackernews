@@ -9,11 +9,17 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    about: {
+    }, 
+    author: {
         type: String,
         default: ''
+    },
+    rank: {
+        type: Number,
+        default: 0
     }
+
+    // rank, title, domain, points, author, time, comments
 });
 
 const Post = mongoose.model('Post', postSchema);
