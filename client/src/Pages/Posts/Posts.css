@@ -1,0 +1,64 @@
+.post {
+    display: flex;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .post-rank {
+    color: #6b7280; 
+    width: 20px;
+  }
+  
+  .post-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post-title {
+    color: black;
+    text-decoration: none;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 10pt;
+  }
+  
+  .post-domain {
+    color: #6b7280;
+    font-size: 12px;
+  }
+  .post-domain:hover {
+    text-decoration: underline;
+  }
+  
+  .post-meta {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  
+  .post-hide {
+    cursor: pointer;
+  }
+  
+  .post-hide:hover {
+    text-decoration: underline;
+  }
+
+.link {
+    text-decoration: none;
+    color: grey;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+  
+.title {
+    display: inline-flex; 
+}
+
+.title span {
+    padding: 0px 5px;
+}
+  
