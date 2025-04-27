@@ -5,6 +5,7 @@ import NotFoundPafge from './Pages/NotFoundPage/NotFoundPafge';
 import Reset from './Pages/ResetPage/ResetPage';
 import MainContent from './Pages/Welcome/Welcome';
 import JobsPage from './Pages/JobsPage/JobsPage';
+// import Logout from './Pages/LogoutPage/LogoutPage';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './App.css'
 
@@ -14,7 +15,9 @@ const router = createBrowserRouter([
   { path: '/submit', element: <Submit/>, errorElement:<NotFoundPafge/> },
   { path: '/forgot', element: <Reset/>, errorElement:<NotFoundPafge/> },
   { path: '/welcome', element: <MainContent/>, errorElement: <NotFoundPafge/> },
-  { path: '/jobs', element: <JobsPage/>, errorElement: <NotFoundPafge/> }
+  { path: '/jobs', element: <JobsPage/>, errorElement: <NotFoundPafge/> },
+  // { path: '/logout', element: <Logout/>, errorElement: <NotFoundPafge/> }
+
 ]);
 
 function App() {

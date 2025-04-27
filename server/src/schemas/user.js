@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import Post from './post.js';
 const userSchema = new mongoose.Schema({
   
   username: {
@@ -48,7 +48,11 @@ const userSchema = new mongoose.Schema({
   delay: {
     type: Number,
     default: 0
-  }
+  },
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 });
 
 const User = mongoose.model('User', userSchema);
