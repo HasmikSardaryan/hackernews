@@ -26,7 +26,6 @@ export const register_post = async (req, res) => {
   }
 };
 
-
 export const login_post = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -44,9 +43,20 @@ export const login_post = async (req, res) => {
       const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, {
         expiresIn: '1h',
       });
+      res.cookie('token', token, {
+        httpOnly: true,
+        maxAge: 3600000,
+        secure: false, 
+        sameSite: 'Strict',
+      });
   
       res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
       res.status(500).json({ error: 'Server error during login' });
     }
-  }
+};
+
+export const getUser = async (req, res) => {
+  const user = await User.findById(req.user.id).select('-password');
+  res.json({ user });
+}

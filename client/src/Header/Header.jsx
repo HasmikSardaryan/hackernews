@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './header.css'
+import useAuthContext from "../hooks/useAuthContext";
 const Header = () => {
+    const { user, isLoading } = useAuthContext();
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className="header">
             <Link to='' > <img style={{border: 'solid white'}} src="https://news.ycombinator.com/y18.svg" alt="" /></Link>
              <Link to="/" className="router">Hacker News</Link>
-             <Link to="/welcome" className="router">welcome</Link>|
+             {user && <Link to="/welcome" className="router">welcome</Link>}|
              <Link to="/newest" className="router">new</Link>|
-             <Link to="/thread" className="router">thread</Link>
+             {user && <Link to="/thread" className="router">thread</Link>}|
              <Link to="/past" className="router">past</Link>|
              <Link to="/comments" className="router">comments</Link>|
              <Link to="/ask" className="router">ask</Link>|
@@ -16,7 +21,8 @@ const Header = () => {
              <Link to="/jobs" className="router">jobs</Link>|
              <Link to="/submit" className="router">submit</Link>
              <span className="login">
-                <Link to="/login" className="router">login</Link>
+                {user ? (<Link to="/logout" className="router">Logout</Link>) 
+                : (<Link to="/login" className="router">Login</Link>)}
              </span>
         </div>
     )

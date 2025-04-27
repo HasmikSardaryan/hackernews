@@ -19,19 +19,10 @@ function HomePage() {
     return (
         <div className="homepage">
         <Header/>
-        <Post
-        rank={1}
-        title="Manufactured Consensus on X.com"
-        domain="rook2root.co"
-        points={168}
-        author="cogitovirus"
-        time="2 hours"
-        comments={90}
-        />
         {posts.map((post, index) => (
         <Post
-          key={post.id}
-          rank={index + 2}
+          key={`index-${index}`}
+          rank={index + 1}
           title={post.title}
           domain={post.url}
           points={post.points}
