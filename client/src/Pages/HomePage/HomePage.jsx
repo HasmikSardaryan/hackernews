@@ -1,25 +1,25 @@
 import React from "react";
-import Header from "../../Header/Header";
+import Header from "../Header/Header";
 import Post from "../Posts/Posts";
 import { useEffect } from "react";
 import { useState } from "react";
-import './HomePage.css'
+import "./HomePage.css";
+import useAuthContext from "../../hooks/useAuthContext";
 
 function HomePage() {
+  const [posts, setPosts] = useState([]);
 
-    const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/posts")
+      .then((res) => res.json())
+      .then((data) => setPosts(data))
+      .catch((err) => console.error("Error fetching posts:", err));
+  }, []);
 
-    useEffect(() => {
-      fetch('http://localhost:3000/posts')
-      .then(res => res.json())
-      .then(data => setPosts(data))
-      .catch(err => console.error("Error fetching posts:", err));
-    }, []);
-
-    return (
-        <div className="homepage">
-        <Header/>
-        {posts.map((post, index) => (
+  return (
+    <div className="homepage">
+      <Header />
+      {posts.map((post, index) => (
         <Post
           key={`index-${index}`}
           rank={index + 1}
@@ -31,9 +31,8 @@ function HomePage() {
           comments={post.comments}
         />
       ))}
-
-        </div>
-    )
+    </div>
+  );
 }
 
 export default HomePage;

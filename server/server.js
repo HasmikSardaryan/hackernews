@@ -1,11 +1,13 @@
 import express from 'express';
-import cors from 'cors'
-import AuthRouter from './src/routers/Auth.router.js';
-import routerSubmit from './src/routers/submits.js';
-import routerPost from './src/routers/posts.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
+
+import AuthRouter from './src/routers/Auth.router.js';
+import PostRouter from './src/routers/Post.router.js';
 import connectToDB from './db.js';
 
+
+connectToDB();
 const app = express();
 connectToDB();
 app.use(cors({
@@ -18,8 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(AuthRouter);
-app.use(routerSubmit);
-app.use(routerPost);
+app.use(PostRouter);
 
 
 const PORT = process.env.PORT || 3000;

@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import './LoginPage.css';
 function Login() {
 
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
@@ -39,10 +39,9 @@ function Login() {
       });
   
       const data = await response.json();
-  
+      console.log('login data:', response.ok);
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        alert('Logged in successfully!');
         navigate('/');
       } else {
         alert(data.error || 'Invalid credentials');
