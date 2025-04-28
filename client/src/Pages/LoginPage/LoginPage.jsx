@@ -42,7 +42,6 @@ function Login() {
       console.log('login data:', response.ok);
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        alert('Logged in successfully!');
         navigate('/');
       } else {
         alert(data.error || 'Invalid credentials');
