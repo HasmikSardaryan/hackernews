@@ -56,7 +56,7 @@ return (
           </label><br/>
 
           <label>url<br/>
-            <input type="text" name="url" onChange={e => setUrl(e.target.value)} />
+            <input type="url" name="url" onChange={e => setUrl(e.target.value)} />
           </label><br/>
 
           <label>text<br/>

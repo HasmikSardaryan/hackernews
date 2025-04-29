@@ -14,17 +14,14 @@ const postSchema = new mongoose.Schema({
     type: String,
         default: ''
   },
-  // author: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true
-  // },
+  time: { 
+    type: Date,
+    default: Date.now
+  },
   rank: {
     type: Number,
     default: 0
-  }
-
-    // rank, title, domain, points, author, time, comments
+  },  
 });
 
 const Post = mongoose.model('Post', postSchema);
