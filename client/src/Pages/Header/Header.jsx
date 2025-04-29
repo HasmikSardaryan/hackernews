@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import "./header.css";
+
 const Header = () => {
   const { user, isLoading } = useAuthContext();
   if (isLoading) {
@@ -9,9 +10,8 @@ const Header = () => {
   }
   return (
     <div className="header">
-      <Link to="">
-        <img
-          style={{ border: "solid white" }}
+      <Link to="/">
+        <img className="logoimg"
           src="https://news.ycombinator.com/y18.svg"
           alt=""
         />

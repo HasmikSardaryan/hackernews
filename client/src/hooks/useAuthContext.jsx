@@ -27,8 +27,7 @@ const useAuthContext = () => {
         checkUserAuthentication();
     }, []);
 
-    const memoizedObject = useMemo(() => ({ user, isLoading }), [user, isLoading]);
-    return memoizedObject;
+    return {user, isLoading};
 };
 
 export default useAuthContext;

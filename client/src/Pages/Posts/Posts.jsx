@@ -12,8 +12,8 @@ const Post = ({ rank, title, domain, points, author, time, comments }) => {
           <span className="post-domain">({domain})</span>
         </div>
         <div className="post-meta">
-          {points} points by <Link className='link' >{author}</Link>|
-            <Link className='link'>{time} ago</Link>|
+          {points} points by <Link className='link' >{author} </Link>
+            <Link className='link'> {time} </Link>|
             <Link className='link'> hide </Link>|
             <Link className='link'> {comments} comments</Link>
         </div>

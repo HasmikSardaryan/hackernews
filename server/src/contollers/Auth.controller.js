@@ -1,4 +1,5 @@
 import User from "../schemas/User.js";
+import Post from "../schemas/Post.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
@@ -53,7 +54,7 @@ export const login_post = async (req, res) => {
       secure: false,
       // sameSite: 'lax',
       sameSite: "Strict",
-      maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+      maxAge: 3 * 24 * 60 * 60 * 1000,
     });
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
@@ -66,7 +67,7 @@ export const getUser = async (req, res) => {
   res.json({ user });
 };
 
-export const logout_post = (req, res) => {
+export const logout_post = async (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logged out successfully" });
 };
