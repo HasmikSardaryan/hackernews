@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Header/Header";
-import Post from "../Posts/Posts";
+import Post from '/src/Components/Posts/Posts.jsx';
 import { useEffect } from "react";
 import { useState } from "react";
 import { formatDistanceToNow } from 'date-fns';

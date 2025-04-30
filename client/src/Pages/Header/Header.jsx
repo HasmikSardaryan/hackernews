@@ -11,7 +11,8 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/">
-        <img className="logoimg"
+        <img
+          className="logoimg"
           src="https://news.ycombinator.com/y18.svg"
           alt=""
         />
@@ -21,6 +22,7 @@ const Header = () => {
       </Link>
       {user && (
         <Link to="/welcome" className="router">
+          {" "}
           welcome
         </Link>
       )}

@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import useUser from '../../hooks/useUser';
 import './Posts.css'
 
 const Post = ({ rank, title, domain, points, author, time, comments }) => {
+  const handleClick = () => {
+    useUser(author._id);
+  };
   return (
     <div className="post">
       <div className="post-rank">{rank}.</div>
@@ -12,10 +16,10 @@ const Post = ({ rank, title, domain, points, author, time, comments }) => {
           <span className="post-domain">({domain})</span>
         </div>
         <div className="post-meta">
-          {points} points by <Link className='link' >{author} </Link>
+          <Link to={`/user/${author._id}`} className='link' onClick={handleClick}>{author.username}</Link>
             <Link className='link'> {time} </Link>|
             <Link className='link'> hide </Link>|
-            <Link className='link'> {comments} comments</Link>
+            <Link to='/comments' className='link'> {comments} comments</Link>
         </div>
       </div>
     </div>
