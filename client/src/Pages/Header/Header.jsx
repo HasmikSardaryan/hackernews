@@ -18,27 +18,28 @@ const Header = () => {
         />
       </Link>
       <Link to="/" className="router">
-        Hacker News
+        <b>Hacker News</b>
       </Link>
       {user && (
         <Link to="/welcome" className="router">
-          {" "}
-          welcome
+          welcome |
         </Link>
       )}
       <Link to="/newest" className="router">
         new
       </Link>
+      |
       {user && (
         <Link to="/thread" className="router">
-          thread
+          thread |
         </Link>
       )}
+
       <Link to="/past" className="router">
         past
       </Link>
       |
-      <Link to="/login" className="router">
+      <Link to="/comments" className="router">
         comments
       </Link>
       |

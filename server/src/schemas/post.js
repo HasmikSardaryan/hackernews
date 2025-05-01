@@ -15,6 +15,10 @@ const postSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  points: {
+    type: Number,
+    default: 0,
+  },
   time: { 
     type: Date,
     default: Date.now
@@ -23,6 +27,12 @@ const postSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },  
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ],
 });
 
 const Post = mongoose.model('Post', postSchema);

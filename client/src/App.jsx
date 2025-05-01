@@ -7,6 +7,8 @@ import MainContent from './Pages/Welcome/Welcome';
 import JobsPage from './Pages/JobsPage/JobsPage';
 import Logout from './Pages/LogoutPage/LogoutPage';
 import UserPage from './Pages/UserPage/UserPage';
+import Newest from './Pages/Newest/Newest';
+import Comments from './Pages/HomePage/Comments/Comments';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -17,7 +19,10 @@ const router = createBrowserRouter([
   { path: '/welcome', element: <MainContent/>, errorElement: <NotFoundPafge/> },
   { path: '/jobs', element: <JobsPage/>, errorElement: <NotFoundPafge/> },
   { path: '/logout', element: <Logout/>, errorElement: <NotFoundPafge/> },
-  { path: '/user/:id', element: <UserPage/>, errorElement: <NotFoundPafge/> } 
+  { path: '/user/:id', element: <UserPage/>, errorElement: <NotFoundPafge/> },
+  { path: '/newest', element: <Newest/>, errorElement: <NotFoundPafge/> },
+  { path: '/comments/:postId', element: <Comments/>, errorElement: <NotFoundPafge/> }
+
 ]);
 
 function App() {

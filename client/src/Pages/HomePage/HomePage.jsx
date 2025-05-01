@@ -20,7 +20,6 @@ function HomePage() {
     <div className="homepage">
       <Header />
       {posts
-        .sort((a, b) => new Date(b.time) - new Date(a.time))
         .map((post, index) => {
           const timeAgo = formatDistanceToNow(new Date(post.time), { addSuffix: true });
 
@@ -34,6 +33,7 @@ function HomePage() {
               author={post.author}
               time={timeAgo}
               comments={post.comments}
+              _id={post._id} 
             />
           );
         })}

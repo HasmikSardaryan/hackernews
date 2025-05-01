@@ -14,9 +14,15 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10pt;
 }
-
+.login {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
 .logoimg {
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
     border: 1px solid white;
+    display: block;
+    margin-right: 4px;
 }
