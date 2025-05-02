@@ -4,7 +4,6 @@
     margin-bottom: 10px;
     font-family: Verdana, Geneva, sans-serif;
     font-size: 13px;
-    border-left: 3px solid #eee;
   }
   
   .meta {
@@ -23,7 +22,7 @@
   }
   
   .text {
-    font-size: 13px;
+    font-size: 9pt;
     margin-left: 15px;
     line-height: 1.4;
     color: #000;
@@ -32,4 +31,12 @@
 span {
     padding: 0;
 }
-  
+
+.reply-button1 {
+  margin-left: 15px;
+  font-size: 7pt;   
+  font-family: Verdana, Geneva, sans-serif;
+}
+a {
+  color: #828282;
+}

@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns'
 import Header from '../../Header/Header';
 
 const Comments = () => {
-  const { postId } = useParams(); // Get the postId from the URL
+  const { postId } = useParams();
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState('');
@@ -46,16 +46,21 @@ const Comments = () => {
       const data = await res.json();
       if (res.ok) {
         setComments(prev => [...prev, data.comment]);
+        // console.log(comments);
         setNewComment('');
       } else {
-        alert('You must be logged in to comment');
+        if (data.err == 'no token') {
+          alert('You must be logged in to comment');
+        } else {
+          alert(data.error || 'Something went wrong');
+        }
       }
     } catch (err) {
       console.error('Failed to submit comment', err);
     }
   };
   return (
-    <div className="homepage">
+    <div className="homepag">
       <Header/>
       {post && (
         <Post
@@ -91,9 +96,10 @@ const Comments = () => {
           author={comment.author}
           text={comment.text}
           time={comment.time}
+          _id={comment._id}
         />
       ))
-}
+      }
 
     </div>
   );

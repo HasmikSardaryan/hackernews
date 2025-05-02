@@ -13,12 +13,12 @@ button {
     cursor: pointer;
 }
 
-span {
+.log-span {
     display: block;
     padding: 10px
 }
 
-div {
+.login {
     display: block;
     align-items: baseline;
 }
