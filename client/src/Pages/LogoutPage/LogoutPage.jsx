@@ -15,8 +15,6 @@ export default function Logout() {
                 if (response.ok) {
                     localStorage.removeItem('token');
                     navigate('/');
-                    // this part runs when the logout is successful twice 
-                    // console.log('Logout successful');
                 } else {
                     alert('Logout failed');
                 }

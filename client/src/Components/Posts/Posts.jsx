@@ -7,8 +7,12 @@ const Post = ({ rank, title, domain, points, author, time, comments, _id }) => {
   const handleClick = () => {
     useUser(author._id);
   };
+  const handleVoting = () => { 
+    
+  }
   return (
     <div className="post">
+        <span onClick={handleVoting}>▲</span>
       <div className="post-rank">{rank}.</div>
       <div className="post-content">
         <div className='title'>
@@ -22,7 +26,7 @@ const Post = ({ rank, title, domain, points, author, time, comments, _id }) => {
           <Link to={`/user/${author._id}`} className='link' onClick={handleClick}>{author.username}</Link>
             <Link className='link'> {time} </Link>|
             <Link className='link'> hide </Link>|
-            <Link to={`/comments/${_id}`}  className='link'> {comments} comments</Link>
+            <Link to={`/comments/${_id}`} className='link'>{comments.length} comments</Link>
         </div>
       </div>
     </div>

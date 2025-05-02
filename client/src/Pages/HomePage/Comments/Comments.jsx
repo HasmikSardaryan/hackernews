@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Post from '../../../Components/Posts/Posts';
+import Comment from '../../../Components/Comment/Comment';
 import { formatDistanceToNow } from 'date-fns'
 import Header from '../../Header/Header';
 
@@ -8,18 +9,23 @@ const Comments = () => {
   const { postId } = useParams(); // Get the postId from the URL
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState(null);
+  const [newComment, setNewComment] = useState('');
 
 
-useEffect(() => {
+  useEffect(() => {
     const fetchPostAndComments = async () => {
       try {
-        const postRes = await fetch(`http://localhost:3000/comments/${postId}`);
+        const postRes = await fetch(`http://localhost:3000/comments/post/${postId}`);
         const postData = await postRes.json();
         setPost(postData);
 
-        // const commentsRes = await fetch(`http://localhost:3000/posts/${postId}/comments`);
-        // const commentsData = await commentsRes.json();
-        // setComments(commentsData);
+        const commentsRes = await fetch(`http://localhost:3000/comments/${postId}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        });
+        const commentsData = await commentsRes.json();
+        setComments(commentsData);
       } catch (err) {
         console.error("Error loading post and comments", err);
       }
@@ -28,6 +34,26 @@ useEffect(() => {
     fetchPostAndComments();
   }, [postId]);
 
+  const handleCommentSubmit = async () => {
+    try {
+      const res = await fetch(`http://localhost:3000/comments/${postId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({text:newComment}),
+        credentials: 'include'
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setComments(prev => [...prev, data.comment]);
+        setNewComment('');
+      } else {
+        alert('You must be logged in to comment');
+      }
+    } catch (err) {
+      console.error('Failed to submit comment', err);
+    }
+  };
   return (
     <div className="homepage">
       <Header/>
@@ -44,17 +70,31 @@ useEffect(() => {
           comments={post.comments.length}
         />
       )}
-  
-      <h3>Comments:</h3>
-      {comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        comments.map(comment => (
-          <div key={comment._id} className="comment">
-            <strong>{comment.author.username}:</strong> {comment.text}
-          </div>
-        ))
-      )}
+
+    <div className="comment">
+        <textarea
+          placeholder="Write a comment..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          rows={4}
+          cols={50}
+        />
+        <br />
+        <button onClick={handleCommentSubmit}>Post Comment</button>
+      </div>
+      {comments.length > 0 &&
+    comments
+      .sort((a, b) => new Date(b.time) - new Date(a.time))
+      .map(comment => (
+        <Comment
+          key={comment._id}
+          author={comment.author}
+          text={comment.text}
+          time={comment.time}
+        />
+      ))
+}
+
     </div>
   );
 };  

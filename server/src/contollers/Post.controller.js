@@ -27,7 +27,6 @@ export const create_post = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
-
 export const get_posts = async (req, res) => {
     try {
       const posts = await Post.find({}).populate("author", "username");
@@ -36,8 +35,7 @@ export const get_posts = async (req, res) => {
       console.error("Failed to fetch posts:", err);
       res.status(500).json({ error: "Server Error" });
     }
-  }
-
+};
 export const get_user = async (req, res) =>  {
     try {
       const user = await User.findById(req.params.id).populate("posts");
@@ -50,9 +48,14 @@ export const get_user = async (req, res) =>  {
       res.status(500).json({ error: 'Server error' });
     }
 };
-
 export const create_comment = async (req, res) => {
+
   const { text } = req.body;
+
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found'});
+  }
   const postId = req.params.id;
 
   if (!text) {
@@ -61,33 +64,29 @@ export const create_comment = async (req, res) => {
 
   try {
     const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+    if (!user) return res.status(404).json({ error: 'User not found' });
 
     const post = await Post.findById(postId);
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
-    }
+    if (!post) return res.status(404).json({ error: 'Post not found' });
 
-    post.comments.push({ text, author: user._id });
+    const comment = new Comment({ text, author: user._id });
+    await comment.save();
+
+    post.comments.push(comment._id);
     await post.save();
 
-    res.status(201).json({ message: 'Comment created successfully!', comment: { text, author: user._id } });
-
+    res.status(201).json({ message: 'Comment created!', comment });
   } catch (error) {
     console.error('Error creating comment:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };
-
-export const get_comment = async (req, res) => {
+export const get_comments = async (req, res) => {
     try {
-      const post = await Post.findById(req.params.postId).populate({
+      const post = await Post.findById(req.params.id).populate({
         path: 'comments',
         populate: { path: 'author', select: 'username' }
-      });
-  
+      });  
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
@@ -98,13 +97,11 @@ export const get_comment = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
 };
-
 export const get_post = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId)
     .populate('author', 'username')
     .populate('comments');
-    console.log(post);
 
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });

@@ -1,0 +1,35 @@
+.comment {
+    background-color: #f6f6ef;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    border-left: 3px solid #eee;
+  }
+  
+  .meta {
+    color: #828282;
+    font-size: 11px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  
+  .author {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .text {
+    font-size: 13px;
+    margin-left: 15px;
+    line-height: 1.4;
+    color: #000;
+  }
+
+span {
+    padding: 0;
+}
+  
