@@ -1,25 +1,24 @@
 import mongoose from 'mongoose';
 
-const CommentSchema = new mongoose.Schema({
+const ReplySchema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
     trim: true
   },
   author: {
+    type: String
+  },
+  parent: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Comment',
     required: true
   },
   time: {
     type: Date,
     default: Date.now
-  },
-  children: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Reply'
-  }]
+  }
 });
 
-const Comment = mongoose.model('Comment', CommentSchema);
-export default Comment;
+const Reply = mongoose.model('Reply', ReplySchema);
+export default Reply;
