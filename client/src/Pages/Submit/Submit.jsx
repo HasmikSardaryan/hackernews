@@ -29,8 +29,7 @@ function Submit() {
       navigate('/');
     }
     catch (err) {
-      console.log('the eror is', err);
-      alert('Error connecting to server1');
+      alert('Error connecting to server');
     }
 
     

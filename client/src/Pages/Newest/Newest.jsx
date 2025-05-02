@@ -32,6 +32,7 @@ const Newest = () => {
                 author={post.author}
                 time={timeAgo}
                 comments={post.comments}
+                _id={post._id} 
               />
             );
           })}
