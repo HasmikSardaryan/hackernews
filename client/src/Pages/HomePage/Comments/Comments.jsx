@@ -46,7 +46,6 @@ const Comments = () => {
       const data = await res.json();
       if (res.ok) {
         setComments(prev => [...prev, data.comment]);
-        // console.log(comments);
         setNewComment('');
       } else {
         if (data.err == 'no token') {
