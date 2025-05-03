@@ -15,9 +15,10 @@ const CommentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    child: {
+    
+    children: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'Comment',
     }
 });
 

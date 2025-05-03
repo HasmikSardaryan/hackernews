@@ -1,7 +1,6 @@
 import User from "../schemas/User.js";
 import Comment from "../schemas/comment.js";
 import Post from "../schemas/Post.js";
-import { login_post } from "./Auth.controller.js";
 
 export const create_post = async (req, res) => { 
   const { title, url, text } = req.body;
@@ -48,36 +47,27 @@ export const get_user = async (req, res) =>  {
       res.status(500).json({ error: 'Server error' });
     }
 };
-export const create_comment = async (req, res) => {
-
+export const post_comment = async (req, res) => {
   const { text } = req.body;
-
-  const user = await User.findById(req.user.id);
-  if (!user) {
-    return res.status(404).json({ error: 'User not found'});
-  }
   const postId = req.params.id;
 
-  if (!text) {
-    return res.status(400).json({ error: 'Missing text' });
-  }
+  if (!text) return res.status(400).json({ error: 'Missing text' });
 
   try {
     const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
-
     const post = await Post.findById(postId);
+
+    if (!user) return res.status(404).json({ error: 'User not found' });
     if (!post) return res.status(404).json({ error: 'Post not found' });
 
-    const comment = new Comment({ text, author: user._id });
-    await comment.save();
+    const comment = await Comment.create({ text, author: user._id });
 
     post.comments.push(comment._id);
     await post.save();
 
     res.status(201).json({ message: 'Comment created!', comment });
-  } catch (error) {
-    console.error('Error creating comment:', error);
+  } catch (err) {
+    console.error('Error creating comment:', err);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -111,5 +101,42 @@ export const get_post = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
+  }
+};
+export const get_commentById = async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.commentId)
+    .populate("author", "username") 
+    .populate("children"); 
+    res.json(comment);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+export const get_user_posts = async (req, res) => {
+
+  const { id } = req.params;
+
+  try {
+    const posts = await Post.find({ author: id }).populate("author", "username");
+    if (!posts.length) {
+      return res.status(404).json({ message: "No posts found for this user" });
+    }
+
+    res.json(posts);
+  } catch (err) {
+    console.error("Failed to fetch user posts:", err);
+    res.status(500).json({ error: "Server Error" });
+  }
+};
+export const get_allcomments = async (req, res) => {
+  try {
+    const comments = await Comment.find({})
+      .populate("author", "username") 
+      .populate("children");           
+      return res.json(comments);
+  } catch (err) {
+    console.error("Failed to fetch comments:", err);
+    res.status(500).json({ error: "Server Error" });
   }
 };

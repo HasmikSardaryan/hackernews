@@ -18,7 +18,7 @@ const Header = () => {
         />
       </Link>
       <Link to="/" className="router">
-        <b>Hacker News</b>
+        <b>Hacker News </b>
       </Link>
       {user && (
         <Link to="/welcome" className="router">
@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
       )}
       <Link to="/newest" className="router">
-        new
+      new
       </Link>
       |
       {user && (
@@ -41,14 +41,6 @@ const Header = () => {
       |
       <Link to="/comments" className="router">
         comments
-      </Link>
-      |
-      <Link to="/ask" className="router">
-        ask
-      </Link>
-      |
-      <Link to="/show" className="router">
-        show
       </Link>
       |
       <Link to="/jobs" className="router">

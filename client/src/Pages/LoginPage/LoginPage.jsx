@@ -41,7 +41,8 @@ function Login() {
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        navigate('/');
+        alert('Logged in siccessfully');
+        navigate(-1);
       } else {
         alert(data.error || 'Invalid credentials');
       }
@@ -52,28 +53,28 @@ function Login() {
 
   return (
     <>
-    <div> 
+    <div className="login"> 
       <p>Login</p>
-      <span>
+      <span className="log-span">
       Username:    
       <input type="text" onChange={e => setLoginUsername(e.target.value)}/>
       </span>
-      <span>
+      <span className="log-span">
       Password:
       <input type="password" onChange={e => setLoginPassword(e.target.value)}/>
       </span>
       <button onClick={handleLogin}>Login</button>
-      <span>
-      <Link to="/forgot">Forgot your password?</Link>
+      <span className="log-span">
+      <Link to="/forgot" style={{ color: '#551AB8' }}>Forgot your password?</Link>
       </span>
     </div>
     <div>
       <p>Create Account</p>
-      <span>
+      <span className="log-span">
         Username:
         <input type="text" onChange={e => setUsername(e.target.value)} />
       </span>
-      <span>
+      <span className="log-span">
         Password:
         <input type="password" onChange={e => setPassword(e.target.value)} />
       </span>

@@ -15,10 +15,7 @@ const postSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  points: {
-    type: Number,
-    default: 0,
-  },
+  points: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   time: { 
     type: Date,
     default: Date.now

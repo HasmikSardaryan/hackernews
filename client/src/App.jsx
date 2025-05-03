@@ -9,6 +9,9 @@ import Logout from './Pages/LogoutPage/LogoutPage';
 import UserPage from './Pages/UserPage/UserPage';
 import Newest from './Pages/Newest/Newest';
 import Comments from './Pages/HomePage/Comments/Comments';
+import ReplyPage from './Pages/ReplyPage/Reply';
+import UserPosts from './Pages/UserPage/UserPosts/UserPosts';
+import AllComments from './Pages/AllComments/AllComments';
 import Past from './Pages/Past/Past';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 
@@ -23,6 +26,9 @@ const router = createBrowserRouter([
   { path: '/user/:id', element: <UserPage/>, errorElement: <NotFoundPafge/> },
   { path: '/newest', element: <Newest/>, errorElement: <NotFoundPafge/> },
   { path: '/past', element: <Past/>, errorElement: <NotFoundPafge/> },
+  { path: '/comments', element: <AllComments/>, errorElement: <NotFoundPafge/> },
+  { path: '/reply/:id', element: <ReplyPage/>, errorElement: <NotFoundPafge/> },
+  { path: '/user/:id/submissions', element: <UserPosts/>, errorElement: <NotFoundPafge/> },
   { path: '/comments/:postId', element: <Comments/>, errorElement: <NotFoundPafge/> }
 
 ]);
